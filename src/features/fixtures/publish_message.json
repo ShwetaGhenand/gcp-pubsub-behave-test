@@ -1,0 +1,13 @@
+{
+	"attributes": {
+		"id": "14we6454rerds",
+		"contentType": "application/json",
+		"verison": "1"
+	},
+	"data": {
+		"name": "John",
+		"age": 31,
+		"city": "New York"
+
+	}
+}

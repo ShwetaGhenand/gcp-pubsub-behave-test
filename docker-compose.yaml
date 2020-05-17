@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+    pubsub-emulator:
+      image: messagebird/gcloud-pubsub-emulator
+      ports:
+        - 8681:8681
+      environment:
+        - PUBSUB_PROJECT1=gcp-project-local,pubsub-topic-local:pubsub-subscription-local
+
+    pubsub-test:
+        image : pubsub-behave-test
+        build : .
+        environment:
+         - PUBSUB_EMULATOR_HOST=pubsub-emulator:8681
+         - GCP_PROJECT_ID=gcp-project-local
+         - PUBSUB_TOPIC_NAME=pubsub-topic-local
+         - PUBSUB_SUBSCRIPTION_NAME=pubsub-subscription-local
+        
