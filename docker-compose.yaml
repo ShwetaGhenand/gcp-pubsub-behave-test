@@ -6,14 +6,15 @@ services:
       ports:
         - 8681:8681
       environment:
-        - PUBSUB_PROJECT1=gcp-project-local,pubsub-topic-local:pubsub-subscription-local
+        - PUBSUB_PROJECT1=gcp-project-local,pubsub-topic-local
 
     pubsub-test:
         image : pubsub-behave-test
         build : .
+        depends_on :
+          - pubsub-emulator
         environment:
          - PUBSUB_EMULATOR_HOST=pubsub-emulator:8681
          - GCP_PROJECT_ID=gcp-project-local
          - PUBSUB_TOPIC_NAME=pubsub-topic-local
-         - PUBSUB_SUBSCRIPTION_NAME=pubsub-subscription-local
         

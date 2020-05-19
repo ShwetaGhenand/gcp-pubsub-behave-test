@@ -14,15 +14,9 @@ build:
 .PHONY: lint
 lint: build
 	docker run --rm \
+	    --entrypoint python3 \
 		${DOCKER_IMAGE} -m flake8 ./
 
 .PHONY: local-run
 local-run: build
-	docker run --rm \
-		--network=data-foundation_default \
-		-e PUBSUB_EMULATOR_HOST=pubsub-emulator:8681 \
-		-e GCP_PROJECT_ID=csdf-local-dev \
-		-e PUBSUB_TOPIC_NAME=customer-interation-topic \
-		${DOCKER_IMAGE}
-
-
+	docker-compose up 
